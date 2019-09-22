@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Separator?>
+
+<?import javafx.scene.shape.Circle?>
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="MainController" prefHeight="300.0" prefWidth="500.0">
+
+    <center>
+        <VBox spacing="10" alignment="CENTER">
+            <padding>
+                <Insets topRightBottomLeft="15"/>
+            </padding>
+            <Circle fx:id="circle" radius="15"/>
+            <Rectangle fx:id="rectangle" width="200" height="100"/>
+        </VBox>
+    </center>
+
+    <bottom>
+        <VBox>
+            <Separator/>
+            <HBox minHeight="100" maxHeight="100">
+                <padding>
+                    <Insets topRightBottomLeft="5"/>
+                </padding>
+                <Label text="" maxWidth="Infinity" HBox.hgrow="ALWAYS" wrapText="true"/>
+                <Separator orientation="VERTICAL"/>
+                <ImageView fx:id="imageView" fitWidth="166.66" fitHeight="100"/>
+            </HBox>
+        </VBox>
+    </bottom>
+
+</BorderPane>
