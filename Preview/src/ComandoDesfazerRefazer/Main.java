@@ -1,6 +1,6 @@
 public class Main
 {
-    public static class Comando extends Changeable
+    public static class Comando extends posicaoMudanca
     {
         private final String valor;
 
@@ -10,12 +10,12 @@ public class Main
             this.valor = v;
         }
 
-        public void undo()
+        public void desfazer()
         {
             System.out.println(valor + " desfeito");
         }
 
-        public void redo()
+        public void refazer()
         {
             System.out.println(valor + " refeito");
         }

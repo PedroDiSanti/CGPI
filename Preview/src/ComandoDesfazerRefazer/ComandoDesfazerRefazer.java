@@ -1,58 +1,58 @@
 public class ComandoDesfazerRefazer
 {
-    private No currentIndex;
-    private No parentNode = new No();
+    private No posicaoAtual;
+    private No noPai = new No();
 
     private class No
     {
-        private No left = null;
-        private No right = null;
-        private final Changeable changeable;
+        private No esquerda = null;
+        private No direita = null;
+        private final posicaoMudanca mudanca;
 
-        public No(Changeable c)
+        public No(posicaoMudanca c)
         {
-            changeable = c;
+            mudanca = c;
         }
 
         public No()
         {
-            changeable = null;
+            mudanca = null;
         }
     }
 
     public ComandoDesfazerRefazer()
     {
-        currentIndex = parentNode;
+        posicaoAtual = noPai;
     }
 
     public ComandoDesfazerRefazer(ComandoDesfazerRefazer manager)
     {
         this();
-        currentIndex = manager.currentIndex;
+        posicaoAtual = manager.posicaoAtual;
     }
 
     public void limparFila()
     {
-        currentIndex = parentNode;
+        posicaoAtual = noPai;
     }
 
-    public void adicionarEstado(Changeable changeable)
+    public void adicionarEstado(posicaoMudanca mudanca)
     {
-        No no = new No(changeable);
+        No no = new No(mudanca);
 
-        currentIndex.right = no;
-        no.left = currentIndex;
-        currentIndex = no;
+        posicaoAtual.direita = no;
+        no.esquerda = posicaoAtual;
+        posicaoAtual = no;
     }
 
     public boolean podeSerDesfeito()
     {
-        return currentIndex != parentNode;
+        return posicaoAtual != noPai;
     }
 
     public boolean podeSerRefeito()
     {
-        return currentIndex.right != null;
+        return posicaoAtual.direita != null;
     }
 
     public void desfazer()
@@ -61,26 +61,26 @@ public class ComandoDesfazerRefazer
             throw new IllegalStateException("Ação não pode ser desfeita.");
         }
 
-        currentIndex.changeable.undo();
+        posicaoAtual.mudanca.desfazer();
         moverParaEsquerda();
     }
 
     private void moverParaEsquerda()
     {
-        if (currentIndex.left == null){
+        if (posicaoAtual.esquerda == null){
             throw new IllegalStateException("Ponteiro apontado para null.");
         }
 
-        currentIndex = currentIndex.left;
+        posicaoAtual = posicaoAtual.esquerda;
     }
 
     private void moverParaDireita()
     {
-        if (currentIndex.right == null){
+        if (posicaoAtual.direita == null){
             throw new IllegalStateException("Ponteiro apontado para null.");
         }
 
-        currentIndex = currentIndex.right;
+        posicaoAtual = posicaoAtual.direita;
     }
 
     public void refazer()
@@ -90,7 +90,7 @@ public class ComandoDesfazerRefazer
         }
 
         moverParaDireita();
-        currentIndex.changeable.redo();
+        posicaoAtual.mudanca.refazer();
     }
 
 }
