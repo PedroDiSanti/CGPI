@@ -126,7 +126,7 @@ public class Crop extends Application
         private RubberBandSelection(Group group)
         {
             this.group = group;
-            rect = new Rectangle( 0,0,0,0);
+            rect = new Rectangle(0,0,0,0);
 
             rect.setStrokeWidth(1);
             rect.setStroke(Color.BLUE);
